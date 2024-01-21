@@ -7,15 +7,18 @@ SharedNotes.belongsTo(Notes);
 SharedNotes.belongsTo(Users, { foreignKey: "sharedById" });
 SharedNotes.belongsTo(Users, { foreignKey: "sharedWithId" });
 Notes.belongsToMany(Users, { through: SharedNotes });
-Users.belongsToMany(Notes, { through: SharedNotes, foreignKey: "sharedWithId" });
+Users.belongsToMany(Notes, {
+  through: SharedNotes,
+  foreignKey: "sharedWithId",
+});
 Users.belongsToMany(Notes, { through: SharedNotes, foreignKey: "sharedById" });
 
-Users.hasMany(Notes, { onDelete: 'cascade' });
+Users.hasMany(Notes, { onDelete: "cascade" });
 Notes.belongsTo(Users);
 
 module.exports = {
-    Notes,
-    Users,
-    SharedNotes,
-    Session,
+  Notes,
+  Users,
+  SharedNotes,
+  Session,
 };

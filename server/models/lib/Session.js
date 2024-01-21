@@ -1,29 +1,35 @@
-const Sequelize = require('sequelize');
-const sequelize = require('../../utils/sequelize');
+const Sequelize = require("sequelize");
+const sequelize = require("../../utils/sequelize");
 
-const Session = sequelize.define("Session", {
+const Session = sequelize.define(
+  "Session",
+  {
     sid: {
-        allowNull: false,
-        type: Sequelize.STRING,
-        primaryKey: true
+      allowNull: false,
+      type: Sequelize.STRING,
+      primaryKey: true,
     },
     sess: {
-        allowNull: false,
-        type: Sequelize.JSON
+      allowNull: false,
+      type: Sequelize.JSON,
     },
     expire: {
-        allowNull: false,
-        type: Sequelize.DATE(6)
-    }
-}, {
+      allowNull: false,
+      type: Sequelize.DATE(6),
+    },
+  },
+  {
     tableName: "session",
-    indexes: [{
+    indexes: [
+      {
         name: "IDX_session_expire",
-        fields: ["expire"]
-    }],
+        fields: ["expire"],
+      },
+    ],
     createdAt: false,
-    updatedAt: false
-});
+    updatedAt: false,
+  }
+);
 
 Session.sync({ alter: true });
 

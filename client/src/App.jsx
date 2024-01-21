@@ -1,35 +1,28 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import { BrowserRouter, Route, Routes, redirect } from "react-router-dom";
+import "./App.css";
+import Header from "./components/Header";
+import Footer from "./components/Footer";
+import All from "./pages/all";
+import MyNotes from "./pages/myNotes";
+import SharedWithMe from "./pages/sharedWithMe";
+import { AiFillPlusCircle } from "react-icons/ai";
 
 function App() {
-  const [count, setCount] = useState(0)
-
   return (
-    <>
-      <div>
-        <a href="https://vitejs.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
-  )
+    <BrowserRouter>
+      <Header />
+      <main className="m-0">
+        <Routes>
+          <Route path="/" element={redirect("/all")} />
+          <Route path="/all" element={<All />} />
+          <Route path="/my-notes" element={<MyNotes />} />
+          <Route path="/shared-with-me" element={<SharedWithMe />} />
+        </Routes>
+        <AiFillPlusCircle className="absolute text-6xl cursor-pointer drop-shadow-md bottom-24 right-6 text-yellow-500" />
+      </main>
+      <Footer />
+    </BrowserRouter>
+  );
 }
 
-export default App
+export default App;
